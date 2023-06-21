@@ -36,17 +36,26 @@ class LocationDetailsViewController: UITableViewController {
     gestureRecognizer.cancelsTouchesInView = false
     tableView.addGestureRecognizer(gestureRecognizer)
   }
-
+  // MARK: -  Done Cancel Button
   @IBAction func done() {
     guard let mainView = navigationController?.parent?.view
     else { return }
     let hudView = HudView.hud(inView: mainView, animated: true)
     hudView.text = "Tagged"
+    //    let delayInSeconds = 0.6
+    afterDelay(0.6) {
+      hudView.hide()
+      self.navigationController?.popViewController(animated: true)
+    }
+    //    DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) {
+    //      hudView.hide()
+    //      self.navigationController?.popViewController(animated: true)
+    //    }
   }
   @IBAction func cancel() {
     navigationController?.popViewController(animated: true)
   }
-// MARK: - Chang placemark -> String
+  // MARK: - Chang placemark -> String
   func string(from placemark: CLPlacemark) -> String {
     var text = ""
     if let tmp = placemark.subThoroughfare {

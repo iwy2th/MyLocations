@@ -17,6 +17,7 @@
 		722F26F229EE4B1100E8D8B1 /* Location.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 722F26F029EE4B1100E8D8B1 /* Location.xcdatamodeld */; };
 		722F26F429EE4B1200E8D8B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722F26F329EE4B1200E8D8B1 /* Assets.xcassets */; };
 		722F26F729EE4B1200E8D8B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722F26F529EE4B1200E8D8B1 /* LaunchScreen.storyboard */; };
+		72440ED32A42F1D500558996 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72440ED22A42F1D500558996 /* Functions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		722F26F329EE4B1200E8D8B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		722F26F629EE4B1200E8D8B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		722F26F829EE4B1200E8D8B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		72440ED22A42F1D500558996 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,8 +71,9 @@
 				722F26EB29EE4B1100E8D8B1 /* CurrenLocationViewController.swift */,
 				721F729629F0F023003C8F1D /* LocationDetailsViewController.swift */,
 				721F729829F12C62003C8F1D /* CategoryPikerViewController.swift */,
-				722F26ED29EE4B1100E8D8B1 /* Main.storyboard */,
 				721F729A29F190C6003C8F1D /* HudView.swift */,
+				72440ED22A42F1D500558996 /* Functions.swift */,
+				722F26ED29EE4B1100E8D8B1 /* Main.storyboard */,
 				722F26F329EE4B1200E8D8B1 /* Assets.xcassets */,
 				722F26F529EE4B1200E8D8B1 /* LaunchScreen.storyboard */,
 				722F26F829EE4B1200E8D8B1 /* Info.plist */,
@@ -153,6 +156,7 @@
 				721F729929F12C62003C8F1D /* CategoryPikerViewController.swift in Sources */,
 				722F26EC29EE4B1100E8D8B1 /* CurrenLocationViewController.swift in Sources */,
 				722F26E829EE4B1100E8D8B1 /* AppDelegate.swift in Sources */,
+				72440ED32A42F1D500558996 /* Functions.swift in Sources */,
 				722F26F229EE4B1100E8D8B1 /* Location.xcdatamodeld in Sources */,
 				722F26EA29EE4B1100E8D8B1 /* SceneDelegate.swift in Sources */,
 				721F729B29F190C6003C8F1D /* HudView.swift in Sources */,
