@@ -179,7 +179,7 @@
                             <tableViewSection id="WQB-5M-JNF">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="CKz-qs-YYW">
-                                        <rect key="frame" x="0.0" y="222.99999809265137" width="393" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="222.9999980926514" width="393" height="43.666667938232393"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CKz-qs-YYW" id="fcA-fr-8Od">
                                             <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="43.666667938232422"/>
@@ -460,6 +460,7 @@
                                 <connections>
                                     <outlet property="addressLabel" destination="iZa-XM-j23" id="2bk-KO-VUH"/>
                                     <outlet property="descriptionLabel" destination="XRp-Tc-xdw" id="n1b-MW-yMh"/>
+                                    <segue destination="vdn-pD-ZTF" kind="show" identifier="EditLocation" id="Azm-iG-3Rg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -472,7 +473,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bn7-AN-9Bm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1895" y="741"/>
+            <point key="canvasLocation" x="1918" y="741"/>
         </scene>
         <!--Location-->
         <scene sceneID="TIS-em-7G7">
@@ -492,6 +493,9 @@
             <point key="canvasLocation" x="992" y="741"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Azm-iG-3Rg"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

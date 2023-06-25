@@ -9,22 +9,39 @@ private let dateFormatter: DateFormatter = {  let formatter = DateFormatter()
   print("******* Hey date da duoc call")
   return formatter
 }()
+
 class LocationDetailsViewController: UITableViewController {
+  // MARK: - Properties
+  var locationToEdit: Location? {
+    didSet {
+      if let locationToEdit {
+        descriptionText = locationToEdit.locationDescription
+        categoryName = locationToEdit.category
+        date = locationToEdit.date
+        coordinate = CLLocationCoordinate2DMake(locationToEdit.latitude, locationToEdit.longitude)
+        placemark = locationToEdit.placemark 
+      }
+    }
+  }
+  var descriptionText = ""
   var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
   var placemark: CLPlacemark?
   var date = Date()
   var categoryName = "No Category"
-  var managedObjectContext: NSManagedObjectContext! 
+  var managedObjectContext: NSManagedObjectContext!
   @IBOutlet weak var descriptionTextView: UITextView!
   @IBOutlet weak var categoryLabel: UILabel!
   @IBOutlet weak var latitudeLabel: UILabel!
   @IBOutlet weak var longitudeLabel: UILabel!
   @IBOutlet weak var addressLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
-  
+  // MARK: - ViewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
-    descriptionTextView.text = ""
+    if let locationToEdit {
+      title = "Edit Location"
+    }
+    descriptionTextView.text = descriptionText
     categoryLabel.text = categoryName
     latitudeLabel.text = String(format: "%.8f", coordinate.latitude)
     longitudeLabel.text = String(format: "%.8f", coordinate.longitude)
@@ -34,7 +51,7 @@ class LocationDetailsViewController: UITableViewController {
       addressLabel.text = "No address Found"
     }
     dateLabel.text = format(date: date)
-    // MARK: - Hide keyboard
+  // MARK: - Hide keyboard
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
     gestureRecognizer.cancelsTouchesInView = false
     tableView.addGestureRecognizer(gestureRecognizer)
@@ -44,28 +61,32 @@ class LocationDetailsViewController: UITableViewController {
     guard let mainView = navigationController?.parent?.view
     else { return }
     let hudView = HudView.hud(inView: mainView, animated: true)
-    hudView.text = "Tagged"
-    //    let delayInSeconds = 0.6
-
+    let location: Location
+    if let locationToEdit {
+      hudView.text = "Update"
+      location = locationToEdit
+    } else {
+      hudView.text = "Tagged"
+      location = Location(context: managedObjectContext)
+    }
     // Save Data
-      let location = Location(context: managedObjectContext)
-      location.locationDescription = descriptionTextView.text
-      location.latitude = coordinate.latitude
-      location.category = categoryName
-      location.longitude = coordinate.longitude
-      location.date = date
-      location.placemark = placemark
+    location.locationDescription = descriptionTextView.text
+    location.latitude = coordinate.latitude
+    location.category = categoryName
+    location.longitude = coordinate.longitude
+    location.date = date
+    location.placemark = placemark
     // Save Data throw error ?
-      do {
-        try managedObjectContext.save()
-        afterDelay(0.6) {
-          hudView.hide()
-          self.navigationController?.popViewController(animated: true)
-        }
-      } catch {
-      //  fatalError("error \(error)")
-        fatalCoreDataError(error)
+    do {
+      try managedObjectContext.save()
+      afterDelay(0.6) {
+        hudView.hide()
+        self.navigationController?.popViewController(animated: true)
       }
+    } catch {
+      //  fatalError("error \(error)")
+      fatalCoreDataError(error)
+    }
   }
   @IBAction func cancel() {
     navigationController?.popViewController(animated: true)
