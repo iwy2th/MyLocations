@@ -1,8 +1,9 @@
 // Core Location FrameWork
 import UIKit
 import CoreLocation
-private let dateFormatter: DateFormatter = {
-  let formatter = DateFormatter()
+import CoreData
+
+private let dateFormatter: DateFormatter = {  let formatter = DateFormatter()
   formatter.dateStyle = .medium
   formatter.timeStyle = .short
   print("******* Hey date da duoc call")
@@ -11,7 +12,9 @@ private let dateFormatter: DateFormatter = {
 class LocationDetailsViewController: UITableViewController {
   var coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
   var placemark: CLPlacemark?
+  var date = Date()
   var categoryName = "No Category"
+  var managedObjectContext: NSManagedObjectContext! 
   @IBOutlet weak var descriptionTextView: UITextView!
   @IBOutlet weak var categoryLabel: UILabel!
   @IBOutlet weak var latitudeLabel: UILabel!
@@ -30,7 +33,7 @@ class LocationDetailsViewController: UITableViewController {
     } else {
       addressLabel.text = "No address Found"
     }
-    dateLabel.text = format(date: Date())
+    dateLabel.text = format(date: date)
     // MARK: - Hide keyboard
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
     gestureRecognizer.cancelsTouchesInView = false
@@ -43,14 +46,26 @@ class LocationDetailsViewController: UITableViewController {
     let hudView = HudView.hud(inView: mainView, animated: true)
     hudView.text = "Tagged"
     //    let delayInSeconds = 0.6
-    afterDelay(0.6) {
-      hudView.hide()
-      self.navigationController?.popViewController(animated: true)
-    }
-    //    DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) {
-    //      hudView.hide()
-    //      self.navigationController?.popViewController(animated: true)
-    //    }
+
+    // Save Data
+      let location = Location(context: managedObjectContext)
+      location.locationDescription = descriptionTextView.text
+      location.latitude = coordinate.latitude
+      location.category = categoryName
+      location.longitude = coordinate.longitude
+      location.date = date
+      location.placemark = placemark
+    // Save Data throw error ?
+      do {
+        try managedObjectContext.save()
+        afterDelay(0.6) {
+          hudView.hide()
+          self.navigationController?.popViewController(animated: true)
+        }
+      } catch {
+      //  fatalError("error \(error)")
+        fatalCoreDataError(error)
+      }
   }
   @IBAction func cancel() {
     navigationController?.popViewController(animated: true)

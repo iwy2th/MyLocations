@@ -1,7 +1,9 @@
 import UIKit
 import CoreLocation
+import CoreData
 
 class CurrenLocationViewController: UIViewController, CLLocationManagerDelegate {
+  var managedObjectContext: NSManagedObjectContext!
   let locationManager = CLLocationManager()
   var location: CLLocation?
   /** Handel error **/
@@ -83,7 +85,7 @@ class CurrenLocationViewController: UIViewController, CLLocationManagerDelegate 
         geocoder.reverseGeocodeLocation(newLocation) { placemarks, error in
           self.lastGeocodingError = error
           if error == nil, let places = placemarks, !places.isEmpty {
-            self.placemark = places.last!
+           self.placemark = places.last!
           } else {
             self.placemark = nil
           }
@@ -217,6 +219,7 @@ class CurrenLocationViewController: UIViewController, CLLocationManagerDelegate 
       let controller = segue.destination as! LocationDetailsViewController
       controller.coordinate = location!.coordinate
       controller.placemark = placemark
+      controller.managedObjectContext = managedObjectContext
     }
   }
 }

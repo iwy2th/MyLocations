@@ -18,6 +18,8 @@
 		722F26F429EE4B1200E8D8B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722F26F329EE4B1200E8D8B1 /* Assets.xcassets */; };
 		722F26F729EE4B1200E8D8B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722F26F529EE4B1200E8D8B1 /* LaunchScreen.storyboard */; };
 		72440ED32A42F1D500558996 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72440ED22A42F1D500558996 /* Functions.swift */; };
+		72440ED62A43001900558996 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72440ED42A43001900558996 /* Location+CoreDataClass.swift */; };
+		72440ED72A43001900558996 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72440ED52A43001900558996 /* Location+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		722F26F629EE4B1200E8D8B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		722F26F829EE4B1200E8D8B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72440ED22A42F1D500558996 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		72440ED42A43001900558996 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		72440ED52A43001900558996 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +54,8 @@
 		722F26DB29EE4B1100E8D8B1 = {
 			isa = PBXGroup;
 			children = (
+				72440ED42A43001900558996 /* Location+CoreDataClass.swift */,
+				72440ED52A43001900558996 /* Location+CoreDataProperties.swift */,
 				722F26E629EE4B1100E8D8B1 /* Location */,
 				722F26E529EE4B1100E8D8B1 /* Products */,
 			);
@@ -157,8 +163,10 @@
 				722F26EC29EE4B1100E8D8B1 /* CurrenLocationViewController.swift in Sources */,
 				722F26E829EE4B1100E8D8B1 /* AppDelegate.swift in Sources */,
 				72440ED32A42F1D500558996 /* Functions.swift in Sources */,
+				72440ED72A43001900558996 /* Location+CoreDataProperties.swift in Sources */,
 				722F26F229EE4B1100E8D8B1 /* Location.xcdatamodeld in Sources */,
 				722F26EA29EE4B1100E8D8B1 /* SceneDelegate.swift in Sources */,
+				72440ED62A43001900558996 /* Location+CoreDataClass.swift in Sources */,
 				721F729B29F190C6003C8F1D /* HudView.swift in Sources */,
 				721F729729F0F023003C8F1D /* LocationDetailsViewController.swift in Sources */,
 			);
