@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -391,6 +392,7 @@
                     <connections>
                         <segue destination="Nwf-Gy-ats" kind="relationship" relationship="viewControllers" id="pTv-v7-ByX"/>
                         <segue destination="eRc-lj-oox" kind="relationship" relationship="viewControllers" id="y0I-AA-CiG"/>
+                        <segue destination="Gs9-rp-BH3" kind="relationship" relationship="viewControllers" id="jrq-gG-JSt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3yS-wM-oCR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -492,9 +494,74 @@
             </objects>
             <point key="canvasLocation" x="992" y="741"/>
         </scene>
+        <!--Map-->
+        <scene sceneID="Eem-Bb-kRu">
+            <objects>
+                <viewController id="vru-kY-Wrw" customClass="MapViewController" customModule="Location" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8Yd-3w-5G0">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aCS-q6-GZb">
+                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vru-kY-Wrw" id="DP8-hr-uAB"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Iq9-ST-PRh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aCS-q6-GZb" firstAttribute="leading" secondItem="Iq9-ST-PRh" secondAttribute="leading" id="4R2-bP-LaP"/>
+                            <constraint firstItem="aCS-q6-GZb" firstAttribute="top" secondItem="Iq9-ST-PRh" secondAttribute="top" id="QcJ-AP-kAF"/>
+                            <constraint firstItem="aCS-q6-GZb" firstAttribute="bottom" secondItem="Iq9-ST-PRh" secondAttribute="bottom" id="kDb-tS-0KV"/>
+                            <constraint firstItem="aCS-q6-GZb" firstAttribute="trailing" secondItem="Iq9-ST-PRh" secondAttribute="trailing" id="yq8-nk-4hg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Map" id="IKc-Va-G7p">
+                        <barButtonItem key="leftBarButtonItem" title="Locations" id="2yx-Lw-hrZ">
+                            <connections>
+                                <action selector="showLocation" destination="vru-kY-Wrw" id="1Qs-I5-jyn"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="User" id="FEO-nG-Ub7">
+                            <connections>
+                                <action selector="showUser" destination="vru-kY-Wrw" id="sCG-w8-WjU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="aCS-q6-GZb" id="HIQ-33-gdT"/>
+                        <segue destination="vdn-pD-ZTF" kind="show" identifier="EditLocation" id="5dZ-aV-ehq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ze0-ON-Vbh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1916.7938931297708" y="1524.6478873239437"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="kWE-iz-QJN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gs9-rp-BH3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" id="8BH-8X-q46"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PmU-E1-fq5">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vru-kY-Wrw" kind="relationship" relationship="rootViewController" id="Ntk-Xw-Mtb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="59B-zb-Pdp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="992" y="1525"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Azm-iG-3Rg"/>
+        <segue reference="5dZ-aV-ehq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
