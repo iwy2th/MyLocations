@@ -29,17 +29,46 @@ class LocationDetailsViewController: UITableViewController {
   var date = Date()
   var categoryName = "No Category"
   var managedObjectContext: NSManagedObjectContext!
+  var image: UIImage?
+  var observer: Any!
   @IBOutlet weak var descriptionTextView: UITextView!
   @IBOutlet weak var categoryLabel: UILabel!
   @IBOutlet weak var latitudeLabel: UILabel!
   @IBOutlet weak var longitudeLabel: UILabel!
   @IBOutlet weak var addressLabel: UILabel!
   @IBOutlet weak var dateLabel: UILabel!
+  @IBOutlet var imageView: UIImageView!
+  @IBOutlet var addPhotoLabel: UILabel!
+  @IBOutlet var imageHeight: NSLayoutConstraint!
+  // MARK: - Methods
+  func show(image: UIImage) {
+    imageView.image = image
+    imageView.isHidden = false
+    addPhotoLabel.text = ""
+    imageHeight.constant = 260
+    tableView.reloadData()
+  }
+  func listenForBackgroundNotification() {
+
+    observer = NotificationCenter.default.addObserver(forName: UIScene.didEnterBackgroundNotification, object: nil, queue: OperationQueue.main) { [weak self] _ in
+      if let weakSelf = self {
+        if weakSelf.presentedViewController != nil {
+          weakSelf.dismiss(animated: false)
+        }
+        weakSelf.descriptionTextView.resignFirstResponder()
+      }
+    }
+  }
   // MARK: - ViewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
     if let locationToEdit {
       title = "Edit Location"
+      if locationToEdit.hasPhoto {
+        if let theImage = locationToEdit.photoImage {
+          show(image: theImage)
+        }
+      }
     }
     descriptionTextView.text = descriptionText
     categoryLabel.text = categoryName
@@ -55,6 +84,7 @@ class LocationDetailsViewController: UITableViewController {
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
     gestureRecognizer.cancelsTouchesInView = false
     tableView.addGestureRecognizer(gestureRecognizer)
+   // listenForBackgroundNotification()
   }
   // MARK: -  Done Cancel Button
   @IBAction func done() {
@@ -68,6 +98,7 @@ class LocationDetailsViewController: UITableViewController {
     } else {
       hudView.text = "Tagged"
       location = Location(context: managedObjectContext)
+      location.photoID = nil
     }
     // Save Data
     location.locationDescription = descriptionTextView.text
@@ -76,6 +107,18 @@ class LocationDetailsViewController: UITableViewController {
     location.longitude = coordinate.longitude
     location.date = date
     location.placemark = placemark
+    if let image = image {
+      if !location.hasPhoto {
+        location.photoID = Location.nextPhotoID() as NSNumber
+      }
+      if let data = image.jpegData(compressionQuality: 0.5) {
+        do {
+          try data.write(to: location.photoURL, options: .atomic)
+        } catch {
+          print("Error writing file: \(error)")
+        }
+      }
+    }
     // Save Data throw error ?
     do {
       try managedObjectContext.save()
@@ -141,6 +184,9 @@ class LocationDetailsViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath.section == 0 && indexPath.row == 0 {
       descriptionTextView.becomeFirstResponder()
+    } else if indexPath.section == 1 && indexPath.row == 0 {
+      tableView.deselectRow(at: indexPath, animated: true)
+     pickPhoto()
     }
   }
   @objc func hideKeyboard(_ gestureRecognizer : UIGestureRecognizer) {
@@ -150,5 +196,53 @@ class LocationDetailsViewController: UITableViewController {
       return
     }
     descriptionTextView.resignFirstResponder()
+  }
+}
+extension LocationDetailsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  // MARK: - Image Helper Methods
+  func takePhotoWithCamera() {
+    let imagePicker = UIImagePickerController()
+    imagePicker.sourceType = .camera
+    imagePicker.delegate = self
+    imagePicker.allowsEditing = true
+    present(imagePicker, animated: true)
+  }
+  // MARK: - Image Picker Delegates
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+    if let theImage = image {
+      show(image: theImage)
+    }
+    dismiss(animated: true)
+  }
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    dismiss(animated: true)
+  }
+  // MARK: - Use Library to add image
+  func choosePhotoFromLibrary() {
+    let imagePicker = UIImagePickerController()
+    imagePicker.sourceType = .photoLibrary
+    imagePicker.delegate = self
+    imagePicker.allowsEditing = true
+    present(imagePicker, animated: true)
+  }
+  // MARK: - Menu Photo
+  func pickPhoto() {
+    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+      showPhotoMenu()
+    } else {
+      choosePhotoFromLibrary()
+    }
+  }
+  func showPhotoMenu() {
+    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+    alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+      self.takePhotoWithCamera()
+    }))
+    alert.addAction(UIAlertAction(title: "Library", style: .default, handler: { _ in
+      self.choosePhotoFromLibrary()
+    }))
+    present(alert, animated: true)
   }
 }

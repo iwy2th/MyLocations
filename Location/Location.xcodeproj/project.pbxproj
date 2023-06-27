@@ -17,7 +17,7 @@
 		722F26F229EE4B1100E8D8B1 /* Location.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 722F26F029EE4B1100E8D8B1 /* Location.xcdatamodeld */; };
 		722F26F429EE4B1200E8D8B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722F26F329EE4B1200E8D8B1 /* Assets.xcassets */; };
 		722F26F729EE4B1200E8D8B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722F26F529EE4B1200E8D8B1 /* LaunchScreen.storyboard */; };
-		72440ED32A42F1D500558996 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72440ED22A42F1D500558996 /* Functions.swift */; };
+		72440ED32A42F1D500558996 /* Functions+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72440ED22A42F1D500558996 /* Functions+extension.swift */; };
 		72440ED62A43001900558996 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72440ED42A43001900558996 /* Location+CoreDataClass.swift */; };
 		72440ED72A43001900558996 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72440ED52A43001900558996 /* Location+CoreDataProperties.swift */; };
 		729A81E42A492D6D00174CF6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 729A81E32A492D6D00174CF6 /* MapViewController.swift */; };
@@ -38,7 +38,7 @@
 		722F26F329EE4B1200E8D8B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		722F26F629EE4B1200E8D8B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		722F26F829EE4B1200E8D8B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72440ED22A42F1D500558996 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		72440ED22A42F1D500558996 /* Functions+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Functions+extension.swift"; sourceTree = "<group>"; };
 		72440ED42A43001900558996 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		72440ED52A43001900558996 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		729A81E32A492D6D00174CF6 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 			children = (
 				722F26E729EE4B1100E8D8B1 /* AppDelegate.swift */,
 				722F26E929EE4B1100E8D8B1 /* SceneDelegate.swift */,
-				72440ED22A42F1D500558996 /* Functions.swift */,
+				72440ED22A42F1D500558996 /* Functions+extension.swift */,
 				729A81E52A492D8800174CF6 /* Controller */,
 				729A81E62A492DAC00174CF6 /* View */,
 				729A81E72A492DE000174CF6 /* Uniti */,
@@ -195,7 +195,7 @@
 				721F729929F12C62003C8F1D /* CategoryPikerViewController.swift in Sources */,
 				722F26EC29EE4B1100E8D8B1 /* CurrenLocationViewController.swift in Sources */,
 				722F26E829EE4B1100E8D8B1 /* AppDelegate.swift in Sources */,
-				72440ED32A42F1D500558996 /* Functions.swift in Sources */,
+				72440ED32A42F1D500558996 /* Functions+extension.swift in Sources */,
 				72F2ED792A48325F00538FF4 /* LocationsViewController.swift in Sources */,
 				72440ED72A43001900558996 /* Location+CoreDataProperties.swift in Sources */,
 				729A81E42A492D6D00174CF6 /* MapViewController.swift in Sources */,
@@ -354,7 +354,9 @@
 				DEVELOPMENT_TEAM = 678S53ST7A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Location/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Add camera to your locatios";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "you ok ?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Add photo to your locations";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -385,7 +387,9 @@
 				DEVELOPMENT_TEAM = 678S53ST7A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Location/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Add camera to your locatios";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "you ok ?";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Add photo to your locations";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
